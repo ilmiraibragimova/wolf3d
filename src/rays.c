@@ -59,8 +59,8 @@ void ft_ray_cast_1(t_w *w, int x)
 	//printf("x%f %f\n", w->player_y, w->ray.delta.x);
 	if ((w->ray.insect = ft_insect(w)))
 	{
-		w->ray.dist = ((w->ray.side == 1) ? ((w->ray.my - w->player_y + (1 - w->ray.step.y) / 2) / w->ray.dir.y):
-					   ((w->ray.mx - w->player_x + (1 - w->ray.step.x) / 2) / w->ray.dir.x));
+		w->ray.dist = ((w->ray.side == 1) ? ((w->ray.my - w->player_y + (1 - w->ray.point0.y) / 2) / w->ray.dir.y):
+					   ((w->ray.mx - w->player_x + (1 - w->ray.point0.x) / 2) / w->ray.dir.x));
 		//printf("si%d\n",w->ray.side);
 		//printf("%d %f %f %f\n",w->ray.my, w->plaey_y, w->ray.step.y,w->ray.dir.y);
 		//if (w->ray.dist == 0)
