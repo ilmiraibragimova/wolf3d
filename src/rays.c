@@ -59,15 +59,16 @@ void ft_ray_cast_1(t_w *w, int x)
 	//printf("x%f %f\n", w->player_y, w->ray.delta.x);
 	if ((w->ray.insect = ft_insect(w)))
 	{
-		w->ray.dist = ((w->ray.side == 1) ? ((w->ray.my - w->player_y + (1 - w->ray.step.y) / 2) / w->ray.dir.y):
-					   ((w->ray.mx - w->player_x + (1 - w->ray.step.x) / 2) / w->ray.dir.x));
+		w->ray.dist = ((w->ray.side == 1) ? ((w->ray.my - w->player_y + (1 - w->ray.point0.y) / 2) / w->ray.dir.y):
+					   ((w->ray.mx - w->player_x + (1 - w->ray.point0.x) / 2) / w->ray.dir.x));
 		//printf("si%d\n",w->ray.side);
 		//printf("%d %f %f %f\n",w->ray.my, w->plaey_y, w->ray.step.y,w->ray.dir.y);
-		//if (w->ray.dist == 0)
-		//	w->ray.dist = 1;
+		if (w->ray.dist < 0.5)
+			w->ray.dist = 1;
 		//if (w->ray.dist < 0)
 			//w->ray.dist = -w->ray.dist;
-		//printf("dist%f\n",w->ray.dist);
+			if (x == 1)
+		printf("dist%f\n",w->ray.dist);
 		w->ray.h = (int)(HEIGHT / w->ray.dist);
 		//printf("h%d\n",w->ray.h);
 		//w->ray.light = 1.0f * (1.0f - w->ray.dist / VIEW_DIST) * (w->ray.side ? 0.9f : 1.f);
@@ -81,7 +82,7 @@ void ft_ray_cast_1(t_w *w, int x)
 			wall = w->s;
 		w->wall_x = (w->ray.side ? w->player_x + w->ray.dist * w->ray.dir.x : w->player_y + w->ray.dist * w->ray.dir.y);
 		w->wall_x -= floor(w->wall_x);
-		w->ray.tex_x = (int)(w->wall_x * (double)w->s->w/4);
+		w->ray.tex_x = (int)(w->wall_x * (double)wall->w/4);
 		if (w->ray.side == 0 && w->ray.dir.x > 0)
 			w->ray.tex_x = (double)wall->w/4 - w->ray.tex_x - 1;
 		if (w->ray.side == 1 && w->ray.dir.y < 0)
@@ -110,7 +111,9 @@ void ft_ray_cast(t_w *w)
 		if (end > HEIGHT - 1)
 			end = HEIGHT - 1;
 		draw_wall(w, x, start, end);
+
 		draw_floor(w, x, start, end);
+		printf("ggg\n");
 		x++;
 		//printf("x%d\n",x);
 	}

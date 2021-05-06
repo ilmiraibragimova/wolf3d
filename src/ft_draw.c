@@ -56,10 +56,12 @@ void		draw_floor(t_w *w, int x, int start, int end)
 	int y;
 	y = end;
 	int tex_y;
+	printf("iii\n");
 	while (y < HEIGHT)
 	{
 		double dist_floor = HEIGHT / (2.0 * y - HEIGHT);
 		double floor_part = dist_floor / w->ray.dist;
+
 		double floorx = floor_part * w->floor_x +
 							  (1.0 - floor_part) * w->player_x;
 		double floory = floor_part * w->floor_y +
@@ -67,6 +69,13 @@ void		draw_floor(t_w *w, int x, int start, int end)
 
 		w->ray.tex_x = (int)(floorx * (double)w->floor->w) %  w->floor->w;
 		tex_y = (int)(floory * (double)w->floor->h) %  w->floor->h;
+		//static int k = 0;
+		//if (x == 0 && k < 10) {
+			//printf("x= %d y= %d\n", w->ray.tex_x, tex_y);
+			//printf("wei%f %f %f\n",floor_part,w->floor_y,w->player_y);
+			printf("dist%f ", w->ray.dist);
+			//k++;
+		//}
 		put_pixel(w->screen, x, y, (read_pixel(w->floor, (int)w->ray.tex_x, (int)tex_y)));
 		y++;
 	}
@@ -83,7 +92,7 @@ void draw_sky(t_w *w)
 			{
 				//printf("%p ",w->sky);
 				put_pixel(w->screen, x, y,
-							   read_pixel(w->sky, (int)(x) % w->sky->w, (int)(y) % w->sky->h));
+							   read_pixel(w->sky, (int)(x + w->ray.sky_x) % w->sky->w, (int)(y) % w->sky->h));
 				//((int *)(w->screen->pixels))[y * WIDTH + x] = \
 				//((int *)(w->sky->pixels))[(int)((y % 200) * w->sky->pitch) + (x % 200) * w->sky->format->BytesPerPixel];
 				y++;

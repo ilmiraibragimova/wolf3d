@@ -95,6 +95,7 @@ int		main(int argc, char **argv)
 	//ft_initmap(w);
 	ft_init(w);
 	init_cam(w);
+	w->ray.sky_x = 0;
 	load_textures(w);
 	//w->floor = load_texture(w->floor, floor);
 	//printf("%p ", w->s);

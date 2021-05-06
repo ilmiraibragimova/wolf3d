@@ -6,7 +6,7 @@
 /*   By: ilmira <ilmira@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:19:21 by ilmira            #+#    #+#             */
-/*   Updated: 2021/05/05 15:02:53 by ilmira           ###   ########.fr       */
+/*   Updated: 2021/05/06 17:38:00 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,55 @@ void	rotate_cam(t_w *w, const uint8_t *keys)
 	if (keys[SDL_SCANCODE_LEFT]) {
 		vec_rotate(&w->cam.dir, 0.5);
 		vec_rotate(&w->cam.pln, 0.5);
+		w->ray.sky_x -= 5;
 	}
 	if (keys[SDL_SCANCODE_RIGHT])
 	{
 		vec_rotate(&w->cam.dir, -0.5);
 		vec_rotate(&w->cam.pln, -0.5);
+		w->ray.sky_x += 5;
 	}
 	if (keys[SDL_SCANCODE_UP]) //|| keys[SDL_SCANCODE_DOWN])
 	{
-		if (!(w->map.z[(int)(w->player_x + w->cam.dir.x * 0.1)][(int)(w->player_y)]))
-			w->player_x = w->player_x + w->cam.dir.x * 0.01;
-		if (!(w->map.z[(int)(w->player_x)][(int)(w->player_y + w->cam.dir.y* 0.1)]))
-			w->player_y = w->player_y + w->cam.dir.y * 0.01;
-		printf("x%f y%f\n",w->player_x,w->player_y);
+		double tmp_x;
+		double tmp_y;
+		tmp_x = w->player_x;
+		tmp_y = w->player_y;
+		int flag = 0;
+		if (!(w->map.z[(int)(w->player_x + w->cam.dir.x * .5)][(int)(w->player_y)])) {
+			w->player_x = w->player_x + w->cam.dir.x * .05;
+			flag = 1;
+			printf("x%f y%f\n", w->player_x, w->player_y);
+			printf("map%d ", (w->map.z[(int)(w->player_x + w->cam.dir.x * .5)][(int) w->player_y]));
+		}
+		if (!(w->map.z[(int)(w->player_x)][(int)(w->player_y + w->cam.dir.y* .5)]))
+		{w->player_y = w->player_y + w->cam.dir.y * .05;
+		flag = 1;}
+		if (flag == 0)
+		{
+			w->player_x = w->player_x + (w->cam.dir.x + 1) * .05;
+			printf("E");
+			w->player_y = tmp_y;
+		}
+		//printf("x%f y%f\n",w->player_x,w->player_y);
 	}
 	if (keys[SDL_SCANCODE_DOWN]) //|| keys[SDL_SCANCODE_DOWN])
 	{
-		if (!(w->map.z[(int)w->player_y][(int)(w->player_x -  w->cam.dir.x * .1)]) &&\
-		(w->player_x -  w->cam.dir.x * .1) >0 &&\
-		(w->player_x -  w->cam.dir.x * .1) < w->map.sizey - 1)
-			w->player_x = w->player_x -  w->cam.dir.x * .1;
-		if (!(w->map.z[(int)(w->player_y -  w->cam.dir.y * 1)][(int)w->player_x]))
-			w->player_y = w->player_y -  w->cam.dir.y * .1;
+		if (!(w->map.z[(int)(w->player_x -  w->cam.dir.x * .5)][(int)w->player_y]))// &&\
+		//(w->player_x -  w->cam.dir.x * .5) > 0 &&\
+		//(w->player_x -  w->cam.dir.x * .5) < w->map.sizey - 1)
+		{
+			w->player_x = w->player_x - w->cam.dir.x * .05;
+			//printf("x%f y%f\n", w->player_x, w->player_y);
+			//printf("map%d ",(w->map.z[(int) (w->player_x - w->cam.dir.x * .5)][(int) w->player_y]));
+		}
+		//if ((w->player_y -  w->cam.dir.y * .5) < (w->map.sizex - 1) &&\
+		//(w->player_y -  w->cam.dir.y * .5) > 0 &&
+		if (!(w->map.z[(int)w->player_x][(int)(w->player_y -  w->cam.dir.y * .5)])) {
+			w->player_y = w->player_y - w->cam.dir.y * .05;
+			//printf("x%f y%f\n", w->player_x, w->player_y);
+			//printf("map%d ", (w->map.z[(int)w->player_x][(int) (w->player_y - w->cam.dir.y * .5)]));
+		}
 	}
 		//w->plaey_x = keys[SDL_SCANCODE_UP] ? \
 		//w->plaey_x - 1 : w->plaey_x + 1;
@@ -71,7 +98,7 @@ void	rotate_cam(t_w *w, const uint8_t *keys)
 		//w->plaey_x = 11.5;
 				//printf("plx%f", w->plaey_x);
 		//w->plaey_y += w->plaey_y * 0.01;
-		printf("ply%f", w->player_x);
+
 
 	//}
 	//if (keys[SDL_SCANCODE_Q] || keys[SDL_SCANCODE_W])
@@ -87,8 +114,8 @@ void	for_keys(t_w *w, const uint8_t *keys, SDL_Event event)
 {
 	//if (event.type == SDL_KEYUP){
 	rotate_cam(w, keys);
+	printf("uaa\n");
 	ft_ray_cast(w);
-
 	//if (r->menu)
 		//menu(r);
 	//else
