@@ -6,7 +6,7 @@
 /*   By: ilmira <ilmira@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:19:21 by ilmira            #+#    #+#             */
-/*   Updated: 2021/05/06 17:38:00 by ilmira           ###   ########.fr       */
+/*   Updated: 2021/05/06 18:26:36 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,14 @@ void	rotate_cam(t_w *w, const uint8_t *keys)
 	}
 	if (keys[SDL_SCANCODE_UP]) //|| keys[SDL_SCANCODE_DOWN])
 	{
-		double tmp_x;
-		double tmp_y;
-		tmp_x = w->player_x;
-		tmp_y = w->player_y;
-		int flag = 0;
 		if (!(w->map.z[(int)(w->player_x + w->cam.dir.x * .5)][(int)(w->player_y)])) {
 			w->player_x = w->player_x + w->cam.dir.x * .05;
-			flag = 1;
-			printf("x%f y%f\n", w->player_x, w->player_y);
-			printf("map%d ", (w->map.z[(int)(w->player_x + w->cam.dir.x * .5)][(int) w->player_y]));
+			//printf("x%f y%f\n", w->player_x, w->player_y);
+			//printf("map%d ", (w->map.z[(int)(w->player_x + w->cam.dir.x * .5)][(int) w->player_y]));
 		}
 		if (!(w->map.z[(int)(w->player_x)][(int)(w->player_y + w->cam.dir.y* .5)]))
-		{w->player_y = w->player_y + w->cam.dir.y * .05;
-		flag = 1;}
-		if (flag == 0)
-		{
-			w->player_x = w->player_x + (w->cam.dir.x + 1) * .05;
-			printf("E");
-			w->player_y = tmp_y;
-		}
-		//printf("x%f y%f\n",w->player_x,w->player_y);
+		w->player_y = w->player_y + w->cam.dir.y * .05;
+
 	}
 	if (keys[SDL_SCANCODE_DOWN]) //|| keys[SDL_SCANCODE_DOWN])
 	{
@@ -114,7 +101,6 @@ void	for_keys(t_w *w, const uint8_t *keys, SDL_Event event)
 {
 	//if (event.type == SDL_KEYUP){
 	rotate_cam(w, keys);
-	printf("uaa\n");
 	ft_ray_cast(w);
 	//if (r->menu)
 		//menu(r);

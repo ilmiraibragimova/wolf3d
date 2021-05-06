@@ -11,7 +11,7 @@
 # include <math.h>
 #include <fcntl.h>
 #include <stdio.h>
-# define HEIGHT 600
+# define HEIGHT 504
 # define WIDTH 896
 
 
@@ -28,7 +28,7 @@ typedef struct s_ray
 	t_vec2 delta;
 	t_vec2 point1;
 	int width;
-	t_vec2 step;
+	//t_vec2 step;
 	int insect;
 	int mx;
 	int my;
@@ -39,6 +39,7 @@ typedef struct s_ray
 	int tex_h;
 	int tex_x;
 	int block;
+	int sky_x;
 }				t_ray;
 
 

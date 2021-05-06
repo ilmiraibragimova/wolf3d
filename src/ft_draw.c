@@ -11,6 +11,10 @@
 		wall = w->s1;
 	else if (w->ray.insect == 2)
 		wall = w->s2;
+	else if (w->ray.insect == 3)
+		wall = w->s3;
+	else if (w->ray.insect == 4)
+		wall = w->s4;
 	else
 		wall = w->s;
 	while (y < end) {
@@ -56,7 +60,6 @@ void		draw_floor(t_w *w, int x, int start, int end)
 	int y;
 	y = end;
 	int tex_y;
-	printf("iii\n");
 	while (y < HEIGHT)
 	{
 		double dist_floor = HEIGHT / (2.0 * y - HEIGHT);
@@ -73,7 +76,7 @@ void		draw_floor(t_w *w, int x, int start, int end)
 		//if (x == 0 && k < 10) {
 			//printf("x= %d y= %d\n", w->ray.tex_x, tex_y);
 			//printf("wei%f %f %f\n",floor_part,w->floor_y,w->player_y);
-			printf("dist%f ", w->ray.dist);
+			//printf("dist%f ", w->ray.dist);
 			//k++;
 		//}
 		put_pixel(w->screen, x, y, (read_pixel(w->floor, (int)w->ray.tex_x, (int)tex_y)));
