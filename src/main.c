@@ -15,6 +15,12 @@ void		ft_init(t_w *w)
 	ft_putendl(SDL_GetError());
 	exit(1);
 }
+void	clean_s(t_w *w)
+{
+	int i = -1;
+	while(++i < 6)
+		SDL_FreeSurface(w->s[i]);
+}
 
 void	loop_for_image(t_w *w)
 {
@@ -30,7 +36,9 @@ void	loop_for_image(t_w *w)
 		{
 			//ft_clean(r);
 			SDL_FreeSurface(w->floor);
-			SDL_FreeSurface(w->s);
+			clean_s(w);
+			free(w->s);
+			SDL_FreeSurface(w->sky);
 			SDL_FreeSurface(w->screen);
 			SDL_DestroyWindow(w->win);
 			//TTF_Quit();

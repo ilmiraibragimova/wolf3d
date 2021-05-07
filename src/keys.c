@@ -6,7 +6,7 @@
 /*   By: ilmira <ilmira@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:19:21 by ilmira            #+#    #+#             */
-/*   Updated: 2021/05/06 18:26:36 by ilmira           ###   ########.fr       */
+/*   Updated: 2021/05/06 19:21:11 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,18 @@ void	rotate_cam(t_w *w, const uint8_t *keys)
 	}
 	if (keys[SDL_SCANCODE_UP]) //|| keys[SDL_SCANCODE_DOWN])
 	{
-		if (!(w->map.z[(int)(w->player_x + w->cam.dir.x * .5)][(int)(w->player_y)])) {
-			w->player_x = w->player_x + w->cam.dir.x * .05;
+		if (!(w->map.z[(int)(w->player_x + w->cam.dir.x * 0.05)][(int)(w->player_y)])) {
+			w->player_x = w->player_x + w->cam.dir.x * .07;
 			//printf("x%f y%f\n", w->player_x, w->player_y);
 			//printf("map%d ", (w->map.z[(int)(w->player_x + w->cam.dir.x * .5)][(int) w->player_y]));
 		}
-		if (!(w->map.z[(int)(w->player_x)][(int)(w->player_y + w->cam.dir.y* .5)]))
-		w->player_y = w->player_y + w->cam.dir.y * .05;
+		if (!(w->map.z[(int)(w->player_x)][(int)(w->player_y + w->cam.dir.y * 0.05)]))
+		w->player_y = w->player_y + w->cam.dir.y * .07;
 
 	}
 	if (keys[SDL_SCANCODE_DOWN]) //|| keys[SDL_SCANCODE_DOWN])
 	{
-		if (!(w->map.z[(int)(w->player_x -  w->cam.dir.x * .5)][(int)w->player_y]))// &&\
+		if (!(w->map.z[(int)(w->player_x -  w->cam.dir.x * 1)][(int)w->player_y]))// &&\
 		//(w->player_x -  w->cam.dir.x * .5) > 0 &&\
 		//(w->player_x -  w->cam.dir.x * .5) < w->map.sizey - 1)
 		{
@@ -73,7 +73,7 @@ void	rotate_cam(t_w *w, const uint8_t *keys)
 		}
 		//if ((w->player_y -  w->cam.dir.y * .5) < (w->map.sizex - 1) &&\
 		//(w->player_y -  w->cam.dir.y * .5) > 0 &&
-		if (!(w->map.z[(int)w->player_x][(int)(w->player_y -  w->cam.dir.y * .5)])) {
+		if (!(w->map.z[(int)w->player_x][(int)(w->player_y -  w->cam.dir.y * 1)])) {
 			w->player_y = w->player_y - w->cam.dir.y * .05;
 			//printf("x%f y%f\n", w->player_x, w->player_y);
 			//printf("map%d ", (w->map.z[(int)w->player_x][(int) (w->player_y - w->cam.dir.y * .5)]));

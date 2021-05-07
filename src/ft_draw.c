@@ -1,38 +1,40 @@
 #include "wolf.h"
 
+
  void		draw_wall(t_w *w, int x, int start, int end)
 {
 	int		y;
 	double 	tex_y;
 
 	y = start;
-	SDL_Surface *wall;
-	if (w->ray.insect == 1)
-		wall = w->s1;
+	/*if (w->ray.insect == 1 && find_side_num(w) == 1)
+		wall = w->s[1];
+	else if (w->ray.insect == 1 && find_side_num(w) == 2)
+		wall = w->s[5];
 	else if (w->ray.insect == 2)
-		wall = w->s2;
+		wall = w->s[2];
 	else if (w->ray.insect == 3)
-		wall = w->s3;
+		wall = w->s[3];
 	else if (w->ray.insect == 4)
-		wall = w->s4;
+		wall = w->s[4];
 	else
-		wall = w->s;
+		wall = w->s[0];*/
 	while (y < end) {
 		//printf("w%d h%d", w->s->w, w->s->h);
 		//printf("x=%d y=%d\n",(int)w->ray.tex_x,(int)tex_y);
-		int d = y * wall->h - HEIGHT *  wall->h/2 + w->ray.h * wall->h/2;
-		tex_y = ((d * (double)wall->h/4) / w->ray.h) / wall->h;
+		int d = y * w->s1->h - HEIGHT *  w->s1->h/2 + w->ray.h * w->s1->h/2;
+		tex_y = ((d * (double)w->s1->h/4) / w->ray.h) / w->s1->h;
 		//put_pixel(w->screen, x, y,
 					 // read_pixel(wall, w->ray.tex_x, tex_y));
 		//(int)(((y + HEIGHT / 2 - w->ray.h / 2) * w->s->h) /(int)w->ray.h);
 		((int *)(w->screen->pixels))[y * WIDTH + x] = \
-         ((int *)(wall->pixels))[(int)tex_y * wall->pitch + (int)w->ray.tex_x * wall->format->BytesPerPixel];
+         ((int *)(w->s1->pixels))[(int)tex_y * w->s1->pitch + (int)w->ray.tex_x * w->s1->format->BytesPerPixel];
 		y++;
 	}
 }
 static void	find_wall(t_w *w)
 {
-	if (w->ray.side == 0 && w->ray.dir.x > 0)
+	if ((w->ray.side == 0 ) && w->ray.dir.x > 0)
 	{
 		w->floor_x = w->ray.mx;
 		w->floor_y = w->ray.my + w->wall_x;
