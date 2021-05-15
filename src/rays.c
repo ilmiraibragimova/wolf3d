@@ -142,7 +142,7 @@ void ft_ray_cast_1(t_w *w, int x)
 		else if (w->ray.insect == 8)
 		{
 			w->s1 = w->s[10];
-			if (find_side_num(w) == 4 ||find_side_num(w) == 1)
+			if (find_side_num(w) == 4)
 				w->floor = w->floor1;}
 		else if (w->ray.insect == 7)
 		{w->s1 = w->s[16];
