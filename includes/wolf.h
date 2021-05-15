@@ -76,6 +76,11 @@ typedef struct	s_w
 	SDL_Texture		*texture;
 	SDL_Surface		**s;
 	SDL_Surface		*s1;
+	SDL_Surface		*s2;
+	SDL_Surface		*s3;
+	SDL_Surface		*s4;
+	SDL_Surface		*s5;
+	SDL_Surface		*s6;
 	SDL_Surface 	*floor;
 	SDL_Surface 	*sky;
 	double floor_x;

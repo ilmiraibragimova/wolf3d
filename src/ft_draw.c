@@ -66,6 +66,8 @@ void		draw_floor(t_w *w, int x, int start, int end)
 	{
 		double dist_floor = HEIGHT / (2.0 * y - HEIGHT);
 		double floor_part = dist_floor / w->ray.dist;
+		if (floor_part > 1)
+			floor_part = 1;
 
 		double floorx = floor_part * w->floor_x +
 							  (1.0 - floor_part) * w->player_x;
@@ -75,9 +77,9 @@ void		draw_floor(t_w *w, int x, int start, int end)
 		w->ray.tex_x = (int)(floorx * (double)w->floor->w) %  w->floor->w;
 		tex_y = (int)(floory * (double)w->floor->h) %  w->floor->h;
 		//static int k = 0;
-		//if (x == 0 && k < 10) {
-			//printf("x= %d y= %d\n", w->ray.tex_x, tex_y);
-			//printf("wei%f %f %f\n",floor_part,w->floor_y,w->player_y);
+		//if ( w->ray.tex_x< 0 || tex_y < 0){
+		//	printf("x= %d y= %d\n", w->ray.tex_x, tex_y);
+		//	printf("wei%f %f %f\n",floor_part,w->floor_y,w->player_y);
 			//printf("dist%f ", w->ray.dist);
 			//k++;
 		//}

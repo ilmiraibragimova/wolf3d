@@ -6,7 +6,7 @@
 /*   By: ilmira <ilmira@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:19:21 by ilmira            #+#    #+#             */
-/*   Updated: 2021/05/06 19:21:11 by ilmira           ###   ########.fr       */
+/*   Updated: 2021/05/14 22:55:46 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,17 @@ void	rotate_cam(t_w *w, const uint8_t *keys)
 	}
 	if (keys[SDL_SCANCODE_UP]) //|| keys[SDL_SCANCODE_DOWN])
 	{
-		if (!(w->map.z[(int)(w->player_x + w->cam.dir.x * 0.05)][(int)(w->player_y)])) {
+		if (!(w->map.z[(int)(w->player_x + w->cam.dir.x * 0.7)][(int)(w->player_y)])) {
 			w->player_x = w->player_x + w->cam.dir.x * .07;
 			//printf("x%f y%f\n", w->player_x, w->player_y);
 			//printf("map%d ", (w->map.z[(int)(w->player_x + w->cam.dir.x * .5)][(int) w->player_y]));
 		}
 		if (!(w->map.z[(int)(w->player_x)][(int)(w->player_y + w->cam.dir.y * 0.05)]))
 		w->player_y = w->player_y + w->cam.dir.y * .07;
+		if ((int)w->player_y != 12 || ((int)w->player_x < 8 ||\
+		(int)w->player_x > 10))
+		w->map.z[9][12] = 9;
+		//	w->map.z[9][11] = 7;}
 
 	}
 	if (keys[SDL_SCANCODE_DOWN]) //|| keys[SDL_SCANCODE_DOWN])
@@ -79,6 +83,15 @@ void	rotate_cam(t_w *w, const uint8_t *keys)
 			//printf("map%d ", (w->map.z[(int)w->player_x][(int) (w->player_y - w->cam.dir.y * .5)]));
 		}
 	}
+	if  (keys[SDL_SCANCODE_O])
+	{
+		printf("x%f y%f\n", w->player_x, w->player_y);
+		printf("map%d ", (w->map.z[(int)w->player_x][(int) (w->player_y - w->cam.dir.y * .5)]));
+		if (w->map.z[9][12] == 9 && ((int)w->player_x == 10 || (int)w->player_x == 8) && (int)w->player_y == 12)
+		{w->map.z[9][12] = 0;}
+			//w->map.z[9][11] = 9;}
+	}
+
 		//w->plaey_x = keys[SDL_SCANCODE_UP] ? \
 		//w->plaey_x - 1 : w->plaey_x + 1;
 		//w->plaey_x += (w->plaey_x * 0.01);
@@ -101,10 +114,13 @@ void	for_keys(t_w *w, const uint8_t *keys, SDL_Event event)
 {
 	//if (event.type == SDL_KEYUP){
 	rotate_cam(w, keys);
+	//printf("x%f y%f\n", w->player_x, w->player_y);
+	//printf("map%d ", (w->map.z[(int)w->player_x][(int) (w->player_y - w->cam.dir.y * .5)]));
 	ft_ray_cast(w);
 	//if (r->menu)
 		//menu(r);
 	//else
+
 	{
 		//for_menu(r);
 		w->texture = SDL_CreateTextureFromSurface(w->ren, w->screen);

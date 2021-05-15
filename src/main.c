@@ -46,7 +46,8 @@ void	loop_for_image(t_w *w)
 			exit(0);
 		}
 		if ((keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_RIGHT] ||
-				keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_DOWN] )\
+				keys[SDL_SCANCODE_UP] || keys[SDL_SCANCODE_DOWN] ||
+				keys[SDL_SCANCODE_O])\
 		//keys[SDL_SCANCODE_Q] || keys[SDL_SCANCODE_W] || \
 		//keys[SDL_SCANCODE_S] || keys[SDL_SCANCODE_Z] || \
 		//keys[SDL_SCANCODE_P] || keys[SDL_SCANCODE_B] ||
@@ -88,47 +89,25 @@ void	ft_put_error(char *s)
 	exit(1);
 }
 
-int		main(int argc, char **argv)
-{
+int		main(int argc, char **argv) {
 	t_w *w;
-	//SDL_Event	event;
 
 	if (argc != 2)
 		ft_usage(1);
-	if (!(w = (t_w*)malloc(sizeof(t_w))))
+	if (!(w = (t_w *) malloc(sizeof(t_w))))
 		ft_usage(5);
 	if (!(ft_read_wolf(argv[1], w)))
 		ft_usage(2);
-	printf("%d %d", w->map.sizex, w->map.sizey);
-	//ft_initmap(w);
+	printf("size%d %d", w->map.sizex, w->map.sizey);
 	ft_init(w);
 	init_cam(w);
 	w->ray.sky_x = 0;
 	load_textures(w);
-	//w->floor = load_texture(w->floor, floor);
-	//printf("%p ", w->s);
 	ft_ray_cast(w);
-	//w->mlx.ptr_init = mlx_init();
-	//w->mlx.ptr_win = mlx_new_window(w->mlx.ptr_init, WIDTH, HEIGHT, "");
-	//w->mlx.ptr_img = mlx_new_image(w->mlx.ptr_init, WIDTH, HEIGHT);
-	//w->addr.img_data = mlx_get_data_addr(w->mlx.ptr_img, &w->addr.bits, \
-	//&w->addr.size_line, &w->addr.endian);
-	//mlx_hook(w->mlx.ptr_win, 2, 3, ft_key, w);
-	//mlx_mouse_hook(w->mlx.ptr_win, ft_mouse, w);
-	//mlx_hook(w->mlx.ptr_win, 6, 1, mouse_julia, f);
-	//mlx_loop(w->mlx.ptr_init);
 	w->texture = SDL_CreateTextureFromSurface(w->ren, w->screen);
 	SDL_RenderCopy(w->ren, w->texture, NULL, NULL);
 	SDL_RenderPresent(w->ren);
 	SDL_DestroyTexture(w->texture);
 
 	loop_for_image(w);
-	/*while (1)
-		while (SDL_PollEvent(&event))
-			if ((SDL_QUIT == event.type) || (SDL_KEYDOWN == event.type &&\
-				SDL_SCANCODE_ESCAPE == event.key.keysym.scancode))
-			{
-				exit(0);
-			}*/
 }
-

@@ -14,35 +14,42 @@ int ft_checkline(char *line)
 
 int ft_countnum(char *line)
 {
-	int i;
 	int count;
+	int i;
 
 	count = 0;
 	i = 0;
-	while(line[i])
+	while(line[i + 1])
 	{
-		if (line[i] >= '0' && line[i] <= '9')
+		if (line[i] == ' ' && line[i + 1] >= '0' && line[i + 1] <= '9')
 			count++;
 		i++;
 	}
-	return (count);
+	return (count + 1);
 
 }
 
 int ft_check(int fd, char **line, t_w *w) {
 	int	count;
 	int	countrow;
+	int count_prev;
 
 	count = 0;
 	countrow = 0;
+	count_prev = 0;
 	while (get_next_line(fd, line))
 	{
-		if (*line[0] == '\0')
-			break;
+		//if (*line[0] == '\0')
+			//break;
 		if (!(ft_checkline(*line)))
-			ft_usage(6);
+			ft_put_error("Map data is incorrect");
 		count = ft_countnum(*line);
+		//printf("%d %d\n", count,count_prev);
+		if (count_prev != count && countrow > 1)
+			ft_put_error("Map data is incorrect");
 		countrow++;
+		count_prev = count;
+		printf("s%s\n",*line);
 		ft_strdel(line);
 	}
 	if (count == 0)
@@ -52,14 +59,14 @@ int ft_check(int fd, char **line, t_w *w) {
 	return (1);
 }
 
-void ft_getz(int fd, char *line, t_w *w) {
+void ft_getz(int fd, char **line, t_w *w) {
 	int i;
 	int j;
 	char **box;
 
-	get_next_line(fd, &line);
-	box = ft_strsplit(line, ' ');
-	free(line);
+	get_next_line(fd, line);
+	box = ft_strsplit(*line, ' ');
+	free(*line);
 	w->player_x = ft_atoi(box[0]) + 0.;
 	w->player_y = ft_atoi(box[1]) + 0.;
 	//printf("my%d\n",w->player_y);
@@ -72,15 +79,15 @@ void ft_getz(int fd, char *line, t_w *w) {
 	while (i < w->map.sizey)
 	{
 		j = 0;
-		get_next_line(fd, &line);
+		get_next_line(fd, line);
 		if (!(w->map.z[i] = (int *)malloc(sizeof(int) * w->map.sizex)))
 			ft_usage(5);
-		box = ft_strsplit(line, ' ');
-		free(line);
+		box = ft_strsplit(*line, ' ');
+		free(*line);
 		while (j < w->map.sizex)
 		{
 			w->map.z[i][j] = ft_atoi(box[j]);
-			printf("%d ", w->map.z[i][j]);
+			printf("m%d ", w->map.z[i][j]);
 			free(box[j]);
 			box[j] = NULL;
 			j++;
@@ -96,9 +103,11 @@ void ft_getz(int fd, char *line, t_w *w) {
 int	ft_read_wolf(char *argv, t_w *w)
 {
 	char *line;
+	char *line1;
 	int fd;
 
 	line = NULL;
+	line1 = NULL;
 	if ((fd = open(argv, O_RDWR)) < 0)
 		ft_usage(3);
 	if(!(ft_check(fd, &line, w)))
@@ -106,10 +115,11 @@ int	ft_read_wolf(char *argv, t_w *w)
 	if (close(fd) < 0)
 		ft_usage (6);
 	if (line != NULL)
-		free(line);
+	{free(line);
+	line = NULL;}
 	if (!(fd = open(argv, O_RDONLY)))
 		ft_usage(3);
-	ft_getz(fd, line, w);
+	ft_getz(fd, &line1, w);
 	if (close(fd) < 0)
 		ft_usage(6);
 	return (1);

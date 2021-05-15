@@ -7,7 +7,7 @@ void init_cam(t_w *w)
 	w->ray.side = 0;
 }
 
-static int		ft_insect(t_w *w)
+int		ft_insect(t_w *w)
 {
 	int		in;
 	int		dist;
@@ -37,6 +37,7 @@ static int		ft_insect(t_w *w)
 		in = w->map.z[w->ray.mx][w->ray.my];
 		dist++;
 	}
+	//printf("in%d map%d\n", in, w->map.z[w->ray.mx][w->ray.my]);
 	return (in);
 }
 int		find_side_num(t_w *w) {
@@ -93,18 +94,57 @@ void ft_ray_cast_1(t_w *w, int x)
 		if (w->ray.insect == 1 && find_side_num(w) == 1)
 			w->s1 = w->s[1];
 		else if (w->ray.insect == 1 && find_side_num(w) == 2)
-			w->s1 = w->s[5];
-		else if (w->ray.insect == 2)
 			w->s1 = w->s[2];
-		else if (w->ray.insect == 3)
+		else if (w->ray.insect == 1 && find_side_num(w) == 3)
 			w->s1 = w->s[3];
-		else if (w->ray.insect == 4)
+		else if (w->ray.insect == 1 && find_side_num(w) == 4)
 			w->s1 = w->s[4];
-		else
+		else if (w->ray.insect == 2 && find_side_num(w) == 1)
+			w->s1 = w->s[5];
+		else if (w->ray.insect == 2 && find_side_num(w) == 2)
+			w->s1 = w->s[6];
+		else if (w->ray.insect == 2 && find_side_num(w) == 3)
+			w->s1 = w->s[7];
+		else if (w->ray.insect == 2 && find_side_num(w) == 4)
+			w->s1 = w->s[8];
+		else if (w->ray.insect == 3 && find_side_num(w) == 1)
+			w->s1 = w->s[6];
+		else if (w->ray.insect == 3 && find_side_num(w) == 2)
+			w->s1 = w->s[7];
+		else if (w->ray.insect == 3 && find_side_num(w) == 3)
+			w->s1 = w->s[8];
+		else if (w->ray.insect == 3 && find_side_num(w) == 4)
+			w->s1 = w->s[9];
+		else if (w->ray.insect == 5 && find_side_num(w) == 1)
+			w->s1 = w->s[12];
+		else if (w->ray.insect == 5 && find_side_num(w) == 2)
+			w->s1 = w->s[13];
+		else if (w->ray.insect == 5 && find_side_num(w) == 3)
+			w->s1 = w->s[14];
+		else if (w->ray.insect == 5 && find_side_num(w) == 4)
+			w->s1 = w->s[15];
+		//printf("%d ",w->ray.insect);
+		else if (w->ray.insect == 9)
+			w->s1 = w->s[11];
+		else if (w->ray.insect == 4)
 			w->s1 = w->s[0];
+		else if (w->ray.insect == 5)
+			w->s1 = w->s[12];
+		else if (w->ray.insect == 6 && find_side_num(w) == 1)
+			w->s1 = w->s[11];
+		else if (w->ray.insect == 6 && find_side_num(w) == 2)
+			w->s1 = w->s[0];
+		else if (w->ray.insect == 6 && find_side_num(w) == 3)
+			w->s1 = w->s[6];
+		else if (w->ray.insect == 6 && find_side_num(w) == 4)
+			w->s1 = w->s[7];
+		else if (w->ray.insect == 8)
+			w->s1 = w->s[16];
+		else if (w->ray.insect == 7)
+			w->s1 = w->s[16];
 		w->wall_x = ((w->ray.side == 1)? w->player_x + w->ray.dist * w->ray.dir.x : w->player_y + w->ray.dist * w->ray.dir.y);
 		w->wall_x -= floor(w->wall_x);
-		w->ray.tex_x = (int)(w->wall_x * (double)w->s1->w/4);
+		w->ray.tex_x = (int)(w->wall_x * (double)w->s1->w / 4);
 		if (w->ray.side == 0 && w->ray.dir.x > 0)
 			w->ray.tex_x = (double)w->s1->w/4 - w->ray.tex_x - 1;
 		if (w->ray.side  == 1 && w->ray.dir.y < 0)
@@ -127,6 +167,8 @@ void ft_ray_cast(t_w *w)
 
 		ft_ray_cast_1(w, x);
 		start = (int)(HEIGHT * 0.5 - w->ray.h * 0.5);
+		if (w->ray.insect == 5)
+			start = (int)(HEIGHT * 0.5 - w->ray.h * 0.5);
 		end = start + w->ray.h;
 		if (start < 0)
 			start = 0;
