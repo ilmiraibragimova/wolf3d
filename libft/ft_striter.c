@@ -12,7 +12,7 @@
 
 void	ft_striter(char *s, void (*f)(char *))
 {
-	char *s1;
+	char	*s1;
 
 	if (s && f)
 	{

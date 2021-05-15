@@ -6,7 +6,7 @@
 /*   By: hholly <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 15:27:47 by hholly            #+#    #+#             */
-/*   Updated: 2019/11/18 15:22:45 by hholly           ###   ########.fr       */
+/*   Updated: 2021/05/15 23:36:24 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	ft_findn(char **line, char **s, int fd)
 {
-	char			*temp1;
-	size_t			len;
+	char	*temp1;
+	size_t	len;
 
 	len = 0;
 	while (s[fd][len] != '\n' && s[fd][len] != '\0')
@@ -37,7 +37,7 @@ static int	ft_findn(char **line, char **s, int fd)
 	return (1);
 }
 
-int			ftout(int ret, char **line, char *s[], int fd)
+int	ftout(int ret, char **line, char *s[], int fd)
 {
 	if (ret < 0)
 		return (-1);
@@ -46,7 +46,7 @@ int			ftout(int ret, char **line, char *s[], int fd)
 	return (ft_findn(line, s, fd));
 }
 
-int			get_next_line(const int fd, char **line)
+int	get_next_line(const int fd, char **line)
 {
 	static char	*s[OPEN_MAX];
 	char		buff[BUFF_SIZE + 1];
@@ -55,7 +55,8 @@ int			get_next_line(const int fd, char **line)
 
 	if (fd < 0 || fd > OPEN_MAX || line == NULL)
 		return (-1);
-	while ((ret = read(fd, buff, BUFF_SIZE)) > 0)
+	ret = read(fd, buff, BUFF_SIZE);
+	while (ret > 0)
 	{
 		buff[ret] = '\0';
 		if (s[fd] == NULL)
@@ -68,6 +69,7 @@ int			get_next_line(const int fd, char **line)
 		}
 		if (ft_strchr(s[fd], '\n'))
 			break ;
+		ret = read(fd, buff, BUFF_SIZE);
 	}
 	return (ftout(ret, line, s, fd));
 }

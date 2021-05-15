@@ -6,7 +6,7 @@
 /*   By: hholly <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 14:03:48 by hholly            #+#    #+#             */
-/*   Updated: 2019/09/22 21:02:38 by hholly           ###   ########.fr       */
+/*   Updated: 2021/05/16 00:02:54 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static size_t	ft_count(char const *s1, char c)
 
 static size_t	ft_countword(char const *s1, char c)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (*s1 && *s1 == c)
@@ -46,9 +46,9 @@ static size_t	ft_countword(char const *s1, char c)
 	return (len);
 }
 
-static	char	**ft_del(char **s0, size_t len)
+static char	**ft_del(char **s0, size_t len)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < len)
@@ -60,18 +60,19 @@ static	char	**ft_del(char **s0, size_t len)
 	return (0);
 }
 
-static char		**ft_fill(char **s0, char const *s, size_t count, char c)
+static char	**ft_fill(char **s0, char const *s, size_t count, char c)
 {
-	size_t i;
-	size_t j;
-	size_t len;
+	size_t	i;
+	size_t	j;
+	size_t	len;
 
 	i = 0;
 	while (i < count)
 	{
 		j = 0;
 		len = ft_countword(s, c);
-		if (!(s0[i] = (char*)malloc((len + 1) * sizeof(char))))
+		s0[i] = (char *)malloc((len + 1) * sizeof(char));
+		if (!s0[i])
 			ft_del(s0, i);
 		while (*s && j < len)
 		{
@@ -86,7 +87,7 @@ static char		**ft_fill(char **s0, char const *s, size_t count, char c)
 	return (s0);
 }
 
-char			**ft_strsplit(char const *s, char c)
+char	**ft_strsplit(char const *s, char c)
 {
 	char	**s0;
 	size_t	count;
@@ -94,7 +95,8 @@ char			**ft_strsplit(char const *s, char c)
 	if (!s)
 		return (NULL);
 	count = ft_count(s, c);
-	if (!(s0 = (char**)malloc(sizeof(char*) * (count + 1))))
+	s0 = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!s0)
 		return (NULL);
 	return (ft_fill(s0, s, count, c));
 }

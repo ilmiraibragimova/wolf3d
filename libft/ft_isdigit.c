@@ -12,7 +12,7 @@
 
 int	ft_isdigit(int c)
 {
-	int c1;
+	int	c1;
 
 	c1 = c;
 	if (c1 >= '0' && c1 <= '9')

@@ -6,17 +6,17 @@
 /*   By: hholly <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 15:38:07 by hholly            #+#    #+#             */
-/*   Updated: 2019/09/17 18:17:37 by hholly           ###   ########.fr       */
+/*   Updated: 2021/05/15 23:14:33 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	unsigned char *s11;
-	unsigned char *s22;
+	unsigned char	*s11;
+	unsigned char	*s22;
 
-	s11 = (unsigned char*)s1;
-	s22 = (unsigned char*)s2;
+	s11 = (unsigned char *)s1;
+	s22 = (unsigned char *)s2;
 	while (*s11 == *s22 && *s11)
 	{
 		s11++;

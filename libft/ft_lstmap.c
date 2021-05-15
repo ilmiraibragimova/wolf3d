@@ -6,7 +6,7 @@
 /*   By: hholly <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 14:03:28 by hholly            #+#    #+#             */
-/*   Updated: 2019/09/22 18:33:18 by hholly           ###   ########.fr       */
+/*   Updated: 2021/05/15 23:00:30 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void	clean(t_list *lst)
 	while (lst)
 	{
 		val = lst->next;
-		ft_memdel((void**)&lst);
+		ft_memdel((void **)&lst);
 		lst = val;
 	}
 }
 
-t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
 	t_list	*val;
 	t_list	*newlist;

@@ -6,7 +6,7 @@
 /*   By: hholly <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 19:18:19 by hholly            #+#    #+#             */
-/*   Updated: 2019/09/22 20:26:11 by hholly           ###   ########.fr       */
+/*   Updated: 2021/05/15 23:14:33 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 char	*ft_strnew(size_t size)
 {
 	char	*s;
-	size_t	i;
 
-	i = 0;
-	if (!(s = (char*)ft_memalloc((size + 1) * sizeof(char))))
+	s = (char *)ft_memalloc((size + 1) * sizeof(char));
+	if (!s)
 		return (NULL);
 	return (s);
 }

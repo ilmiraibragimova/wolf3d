@@ -6,7 +6,7 @@
 /*   By: hholly <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 12:41:42 by hholly            #+#    #+#             */
-/*   Updated: 2019/09/22 16:13:26 by hholly           ###   ########.fr       */
+/*   Updated: 2021/05/15 23:33:35 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 # include <stdlib.h>
 # include <string.h>
 
-typedef	struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
-}					t_list;
+}				t_list;
 
 int					ft_atoi(const char *str);
 int					ft_islower(int c);

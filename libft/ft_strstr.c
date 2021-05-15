@@ -6,7 +6,7 @@
 /*   By: hholly <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 17:57:15 by hholly            #+#    #+#             */
-/*   Updated: 2019/09/22 20:41:49 by hholly           ###   ########.fr       */
+/*   Updated: 2021/05/15 23:14:33 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 char	*ft_strstr(const char *s1, const char *s2)
 {
-	const char *s11;
-	const char *s21;
+	const char	*s11;
+	const char	*s21;
 
 	if (*s2 == '\0')
-		return ((char*)s1);
+		return ((char *)s1);
 	while (*s1)
 	{
 		s11 = s1;
@@ -29,7 +29,7 @@ char	*ft_strstr(const char *s1, const char *s2)
 			s21++;
 		}
 		if (*s21 == '\0')
-			return ((char*)s1);
+			return ((char *)s1);
 		else
 			s1++;
 	}

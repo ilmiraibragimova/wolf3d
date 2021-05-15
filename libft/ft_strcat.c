@@ -6,7 +6,7 @@
 /*   By: hholly <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 19:07:40 by hholly            #+#    #+#             */
-/*   Updated: 2019/09/22 19:09:10 by hholly           ###   ########.fr       */
+/*   Updated: 2021/05/15 23:35:16 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_strcat(char *s1, const char *s2)
 {
-	size_t len1;
-	size_t len2;
-	size_t i;
-	size_t j;
+	size_t	len1;
+	size_t	len2;
+	size_t	i;
+	size_t	j;
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
