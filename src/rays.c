@@ -91,6 +91,7 @@ void ft_ray_cast_1(t_w *w, int x)
 		//printf("h%d\n",w->ray.h);
 		//w->ray.light = 1.0f * (1.0f - w->ray.dist / VIEW_DIST) * (w->ray.side ? 0.9f : 1.f);
 		//r->texture = tex[hit];
+		w->floor = w->floor2;
 		if (w->ray.insect == 1 && find_side_num(w) == 1)
 			w->s1 = w->s[1];
 		else if (w->ray.insect == 1 && find_side_num(w) == 2)
@@ -139,9 +140,21 @@ void ft_ray_cast_1(t_w *w, int x)
 		else if (w->ray.insect == 6 && find_side_num(w) == 4)
 			w->s1 = w->s[7];
 		else if (w->ray.insect == 8)
-			w->s1 = w->s[16];
+		{
+			w->s1 = w->s[10];
+			if (find_side_num(w) == 4 ||find_side_num(w) == 1)
+				w->floor = w->floor1;}
 		else if (w->ray.insect == 7)
-			w->s1 = w->s[16];
+		{w->s1 = w->s[16];
+			w->floor = w->floor1;}
+		else if (w->ray.insect == 10)
+		{w->s1 = w->s[17];
+		w->floor = w->floor1;}
+		else if (w->ray.insect == 11)
+		{
+			w->s1 = w->s[17];
+			if (find_side_num(w) == 2 || find_side_num(w) == 4)
+				w->floor = w->floor1;}
 		w->wall_x = ((w->ray.side == 1)? w->player_x + w->ray.dist * w->ray.dir.x : w->player_y + w->ray.dist * w->ray.dir.y);
 		w->wall_x -= floor(w->wall_x);
 		w->ray.tex_x = (int)(w->wall_x * (double)w->s1->w / 4);
@@ -175,7 +188,6 @@ void ft_ray_cast(t_w *w)
 		if (end > HEIGHT - 1)
 			end = HEIGHT - 1;
 		draw_wall(w, x, start, end);
-
 		draw_floor(w, x, start, end);
 		x++;
 		//printf("x%d\n",x);

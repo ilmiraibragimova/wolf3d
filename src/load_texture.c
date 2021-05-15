@@ -26,14 +26,15 @@ void load_textures(t_w *w)
 	w->s[8] = load_tex("textures/DSC_8439.bmp", w);
 	w->s[9] = load_tex("textures/DSC_8490.bmp", w);
 	w->s[10] = load_tex("textures/2018-06-21-21-00-24.bmp", w);
-	w->s[11] = load_tex("textures/2018-06-21-21-00-24.bmp", w);
+	w->s[11] = load_tex("textures/texture-golden-metal-gate-with-1058038.bmp", w);
 	w->s[12] = load_tex("textures/banksy8.bmp", w);
 	w->s[13] = load_tex("textures/banksy5.bmp", w);
 	w->s[14] = load_tex("textures/benksy2.bmp", w);
 	w->s[15] = load_tex("textures/banksy6.bmp", w);
 	w->s[16] = load_tex("textures/hastle.bmp", w);
-	//w->s[17] = load_tex("textures/highriseresidential0136-h.bmp", w);
-	w->floor = load_tex("textures/brus.bmp", w);
+	w->s[17] = load_tex("textures/china_style.bmp", w);
+	w->floor2 = load_tex("textures/brus.bmp", w);
+	w->floor1 = load_tex("textures/grass-bg-049_pre.bmp", w);
 	w->sky = load_tex("textures/sky-5980.bmp", w);
 	printf("%p",w->s[1]);
 }

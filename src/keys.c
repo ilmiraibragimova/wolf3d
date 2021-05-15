@@ -6,7 +6,7 @@
 /*   By: ilmira <ilmira@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:19:21 by ilmira            #+#    #+#             */
-/*   Updated: 2021/05/14 22:55:46 by ilmira           ###   ########.fr       */
+/*   Updated: 2021/05/15 17:02:43 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ void	rotate_cam(t_w *w, const uint8_t *keys)
 		(int)w->player_x > 10))
 		w->map.z[9][12] = 9;
 		//	w->map.z[9][11] = 7;}
+		if ((int)w->player_y != 3 || ((int)w->player_x < 7 ||\
+		w->player_x > 9.9))
+			w->map.z[8][3] = 8;
 
 	}
 	if (keys[SDL_SCANCODE_DOWN]) //|| keys[SDL_SCANCODE_DOWN])
@@ -82,14 +85,23 @@ void	rotate_cam(t_w *w, const uint8_t *keys)
 			//printf("x%f y%f\n", w->player_x, w->player_y);
 			//printf("map%d ", (w->map.z[(int)w->player_x][(int) (w->player_y - w->cam.dir.y * .5)]));
 		}
+		if ((int)w->player_y != 12 || ((int)w->player_x < 8 ||\
+		(int)w->player_x > 10))
+			w->map.z[9][12] = 9;
+		//	w->map.z[9][11] = 7;}
+		if ((int)w->player_y != 3 || ((int)w->player_x < 7 ||\
+		w->player_x > 9.9))
+			w->map.z[8][3] = 8;
 	}
 	if  (keys[SDL_SCANCODE_O])
 	{
 		printf("x%f y%f\n", w->player_x, w->player_y);
 		printf("map%d ", (w->map.z[(int)w->player_x][(int) (w->player_y - w->cam.dir.y * .5)]));
 		if (w->map.z[9][12] == 9 && ((int)w->player_x == 10 || (int)w->player_x == 8) && (int)w->player_y == 12)
-		{w->map.z[9][12] = 0;}
+			w->map.z[9][12] = 0;
 			//w->map.z[9][11] = 9;}
+		else if (w->map.z[8][3] == 8 && ((w->player_x >= 9.6 && w->player_x <=9.9) || (int)w->player_x == 7) && (int)w->player_y == 3)
+			 	w->map.z[8][3] = 0;
 	}
 
 		//w->plaey_x = keys[SDL_SCANCODE_UP] ? \
