@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 20:44:42 by lseema            #+#    #+#             */
-/*   Updated: 2021/05/16 03:32:14 by lseema           ###   ########.fr       */
+/*   Updated: 2021/05/16 07:46:00 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_init(t_w *w)
 			if (w->ren)
 			{
 				w->screen = SDL_GetWindowSurface(w->win);
-				if (w->screen)
+				if (w->screen && init_audio(w))
 					return ;
 			}
 		}
@@ -61,6 +61,7 @@ void	loop_for_image(t_w *w)
 		if ((SDL_QUIT == event.type) || (SDL_KEYDOWN == event.type && \
 		SDL_SCANCODE_ESCAPE == event.key.keysym.scancode))
 		{
+			free_audio(w);
 			SDL_FreeSurface(w->floor);
 			clean_s(w);
 			free(w->s);

@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 21:00:53 by lseema            #+#    #+#             */
-/*   Updated: 2021/05/16 03:36:36 by lseema           ###   ########.fr       */
+/*   Updated: 2021/05/16 08:14:05 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../frameworks/SDL2.framework/Headers/SDL_surface.h"
 # include "../frameworks/SDL2.framework/Headers/SDL_video.h"
 # include "../frameworks/SDL2.framework/Headers/SDL_render.h"
+# include "../frameworks/SDL2_mixer.framework/Headers/SDL_mixer.h"
 # include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -65,9 +66,20 @@ typedef struct s_map
 	int		y0;
 }			t_map;
 
+typedef struct s_sounds
+{
+	Mix_Chunk	*move;
+	Mix_Chunk	*wood_door;
+	Mix_Chunk	*metal_door;
+	Mix_Music	*birds_chill;
+	Mix_Music	*dark_loops;
+	Mix_Music	*asian_loop;
+}				t_sounds;
+
 typedef struct s_w
 {
 	t_map			map;
+	t_sounds		sounds;
 	int				name;
 	double			x;
 	double			y;
@@ -113,4 +125,7 @@ void	put_pixel(SDL_Surface *surf, const int x, const int y,
 			const int color);
 Uint32	read_pixel(SDL_Surface *surface, const int x, const int y);
 void	ft_put_error(char *s);
+int		init_audio(t_w *w);
+void	audio_handle(t_w *w, const uint8_t *keys);
+void	free_audio(t_w *w);
 #endif

@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 17:19:21 by ilmira            #+#    #+#             */
-/*   Updated: 2021/05/16 03:37:01 by lseema           ###   ########.fr       */
+/*   Updated: 2021/05/16 07:46:20 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	rotate_cam(t_w *w, const uint8_t *keys)
 void	for_keys(t_w *w, const uint8_t *keys)
 {
 	rotate_cam(w, keys);
+	audio_handle(w, keys);
 	ft_ray_cast(w);
 	w->texture = SDL_CreateTextureFromSurface(w->ren, w->screen);
 	SDL_FreeSurface(w->screen);

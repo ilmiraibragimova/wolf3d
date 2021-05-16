@@ -10,8 +10,9 @@ INCLUDES	=	-I./frameworks/SDL2.framework/Versions/A/Headers \
 				 FRAMEWORKS	=	-F./frameworks \
 				-rpath ./frameworks \
 				-framework OpenGL -framework AppKit -framework OpenCl \
-				-framework SDL2 -framework SDL2_ttf -framework SDL2_image
-SRC_FILES = main.c read.c rays.c ft_draw.c keys.c load_texture.c pixel.c check.c ray_insect.c messages.c
+				-framework SDL2 -framework SDL2_ttf -framework SDL2_image -framework SDL2_mixer
+SRC_FILES = main.c read.c rays.c ft_draw.c keys.c load_texture.c pixel.c \
+			check.c ray_insect.c messages.c audio.c
 		OBJ_FILES = $(SRC_FILES:.c=.o)
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
