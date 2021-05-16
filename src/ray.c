@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 21:00:40 by lseema            #+#    #+#             */
-/*   Updated: 2021/05/15 22:17:19 by lseema           ###   ########.fr       */
+/*   Updated: 2021/05/16 03:27:20 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ static double	raytrace_x(t_w *w, t_vec2 *r, t_map *map, double dir)
 	char	one;
 
 	sn = sin(dir);
-	r->x = w->player_x;
-	r->y = w->player_y;
 	if (sn > 0.001 || sn < -0.001)
 	{
 		if (w->map.z[(int)w->player_y][(int)w->player_x])
@@ -55,8 +53,6 @@ static double	raytrace_y(t_w *w, t_vec2 *r, t_map *map, double dir)
 	char	one;
 
 	cn = cos(dir);
-	r->x = w->player_x;
-	r->y = w->player_y;
 	if (cn > 0.001 || cn < -0.001)
 	{
 		if (map->z[(int)w->player_y][(int)w->player_x])
@@ -86,26 +82,22 @@ void	raytrace(t_w *w, double dir)
 	double	dist_x;
 	double	dist_y;
 
+	x = (t_vec2){.x = w->player_x, .y = w->player_y};
+	y = (t_vec2){.x = w->player_x, .y = w->player_y};
 	dist_x = raytrace_x(w, &x, &w->map, dir);
 	dist_y = raytrace_y(w, &y, &w->map, dir);
 	if (dist_x < dist_y)
 	{
-		w->ray = (t_ray){
-			.point0 = x,
-			.dist = dist_x,
-			.block = w->map.z[(int)x.y - (sin(dir) > 0.0)][(int)x.x]
-		};
+		w->ray = (t_ray){.point0 = x, .dist = dist_x,
+			.block = w->map.z[(int)x.y - (sin(dir) > 0.0)][(int)x.x]};
 		w->ray.side = 3;
 		if (sin(dir) < 0.0)
 			w->ray.side = 1;
 	}
 	else
 	{
-		w->ray = (t_ray){
-			.point0 = y,
-			.dist = dist_y,
-			.block = w->map.z[(int)y.y][(int)y.x - (cos(dir) < 0.0)]
-		};
+		w->ray = (t_ray){.point0 = y, .dist = dist_y,
+			.block = w->map.z[(int)y.y][(int)y.x - (cos(dir) < 0.0)]};
 		w->ray.side = 4;
 		if (cos(dir) > 0.0)
 			w->ray.side = 2;
@@ -120,6 +112,7 @@ void	ft_ray_cast(t_w *w)
 	double			angle;
 	t_ray			ray;
 
+	write(1, "1", 1);
 	i = 0;
 	while (i < WIDTH)
 	{

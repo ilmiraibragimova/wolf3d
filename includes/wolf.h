@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 21:00:53 by lseema            #+#    #+#             */
-/*   Updated: 2021/05/15 22:17:42 by lseema           ###   ########.fr       */
+/*   Updated: 2021/05/16 03:36:36 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ typedef struct s_w
 
 void	ft_usage(int a);
 int		ft_read_wolf(char *argv, t_w *w);
+int		ft_check(int fd, char **line, t_w *w);
 void	ft_ray_cast(t_w *w);
+void	manage_ray_insect(t_w *w);
+int		find_side_num(t_w *w);
 void	loop_for_image(t_w *w);
 void	for_keys(t_w *w, const uint8_t *keys);
 void	init_cam(t_w *w);
@@ -110,6 +113,4 @@ void	put_pixel(SDL_Surface *surf, const int x, const int y,
 			const int color);
 Uint32	read_pixel(SDL_Surface *surface, const int x, const int y);
 void	ft_put_error(char *s);
-void	up(t_w *w);
-void	down(t_w *w);
 #endif

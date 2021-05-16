@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 20:44:42 by lseema            #+#    #+#             */
-/*   Updated: 2021/05/15 22:27:58 by lseema           ###   ########.fr       */
+/*   Updated: 2021/05/16 03:32:14 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ void	ft_init(t_w *w)
 	}
 	ft_putendl(SDL_GetError());
 	exit(1);
+}
+
+void	init_cam(t_w *w)
+{
+	w->cam.dir = (t_vec2){-1, 0};
+	w->cam.pln = (t_vec2){0, 0.9};
+	w->ray.side = 0;
 }
 
 void	clean_s(t_w *w)
@@ -68,30 +75,6 @@ void	loop_for_image(t_w *w)
 			keys[SDL_SCANCODE_O]) && SDL_KEYDOWN == event.type)
 			for_keys(w, keys);
 	}
-}
-
-void	ft_usage(int a)
-{
-	if (a == 1)
-		write(1, "usage: wolf3d input_file\n", 22);
-	if (a == 2)
-		write(1, "error in reading input", 22);
-	if (a == 3)
-		write(1, "error opening file", 18);
-	if (a == 4)
-		write(1, "not a valid file", 16);
-	if (a == 5)
-		write(1, "error allocating memory", 23);
-	if (a == 6)
-		write(1, "error closing file", 18);
-	exit(0);
-}
-
-void	ft_put_error(char *s)
-{
-	write(1, s, ft_strlen(s));
-	write(1, "\n", 1);
-	exit(1);
 }
 
 int	main(int argc, char **argv)
