@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 20:17:54 by lseema            #+#    #+#             */
-/*   Updated: 2021/05/16 02:32:21 by lseema           ###   ########.fr       */
+/*   Updated: 2021/05/16 17:46:11 by ilmira           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	parse_map(int fd, t_w *w)
 		while (j < w->map.sizex)
 		{
 			w->map.z[i][j] = ft_atoi(box[j]);
+			if (w->map.z[i][j] < 0 || w->map.z[i][j] > 11)
+				ft_put_error("Wrong data");
 			free(box[j]);
 			box[j] = NULL;
 			j++;
@@ -50,6 +52,9 @@ void	ft_getz(int fd, char **line, t_w *w)
 	free(*line);
 	w->player_x = ft_atoi(box[0]) + 0.;
 	w->player_y = ft_atoi(box[1]) + 0.;
+	if (w->player_x <= 0 || w->player_x >= w->map.sizey || \
+		w->player_y <= 0 || w->player_y >= w->map.sizex)
+		ft_put_error("Player's wrong position");
 	free(box[0]);
 	free(box[1]);
 	free(box);

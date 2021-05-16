@@ -12,8 +12,8 @@
 
 #ifndef WOLF_H
 # define WOLF_H
-# include <unistd.h>
 # include "libft.h"
+# include <unistd.h>
 # include <SDL2/SDL.h>
 # include "../frameworks/SDL2.framework/Headers/SDL_surface.h"
 # include "../frameworks/SDL2.framework/Headers/SDL_video.h"
@@ -21,7 +21,6 @@
 # include "../frameworks/SDL2_mixer.framework/Headers/SDL_mixer.h"
 # include <math.h>
 # include <fcntl.h>
-# include <stdio.h>
 # define HEIGHT 504
 # define WIDTH 896
 
