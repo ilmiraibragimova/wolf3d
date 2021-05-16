@@ -6,7 +6,7 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 21:00:53 by lseema            #+#    #+#             */
-/*   Updated: 2021/05/16 08:14:05 by lseema           ###   ########.fr       */
+/*   Updated: 2021/05/16 17:31:43 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include "../frameworks/SDL2_mixer.framework/Headers/SDL_mixer.h"
 # include <math.h>
 # include <fcntl.h>
-# include <stdio.h>
 # define HEIGHT 504
 # define WIDTH 896
 
