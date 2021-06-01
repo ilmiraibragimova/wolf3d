@@ -6,20 +6,18 @@
 /*   By: lseema <lseema@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 20:17:54 by lseema            #+#    #+#             */
-/*   Updated: 2021/05/16 17:46:11 by ilmira           ###   ########.fr       */
+/*   Updated: 2021/05/16 18:32:23 by lseema           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void	parse_map(int fd, t_w *w)
+void	parse_map(int fd, t_w *w, int i)
 {
 	char	*line;
 	char	**box;
-	int		i;
 	int		j;
 
-	i = 0;
 	while (i < w->map.sizey)
 	{
 		j = 0;
@@ -35,8 +33,7 @@ void	parse_map(int fd, t_w *w)
 			if (w->map.z[i][j] < 0 || w->map.z[i][j] > 11)
 				ft_put_error("Wrong data");
 			free(box[j]);
-			box[j] = NULL;
-			j++;
+			box[j++] = NULL;
 		}
 		free(box);
 		i++;
@@ -61,7 +58,7 @@ void	ft_getz(int fd, char **line, t_w *w)
 	w->map.z = (int **)malloc(sizeof(int *) * (w->map.sizey));
 	if (!(w->map.z))
 		ft_usage(5);
-	parse_map(fd, w);
+	parse_map(fd, w, 0);
 }
 
 int	ft_read_wolf(char *argv, t_w *w)
